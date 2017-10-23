@@ -6,8 +6,8 @@ var app = angular.module("biblioteca-app");
 
 app.service("BibliotecaService", ["$http", function ($http) {
 
-    var urlLivro = "http://localhost:8080/livro";
-    var urlAutor = "http://localhost:8080/autor";
+    var urlLivro = "http://localhost:8081/livro";
+    var urlAutor = "http://localhost:8081/autor";
 
     this.salvarAutor = function (autor, callback) {
 

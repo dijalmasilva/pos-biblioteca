@@ -1,0 +1,16 @@
+version: '2'
+services:
+ postgres:
+  build: ./postgres
+  image: pos/postgres-biblioteca
+  container_name: postgres-biblioteca
+  ports:
+    - "5435:5432"
+ spring:
+  build: .
+  image: pos/biblioteca
+  container_name: biblioteca
+  ports:
+   - "8081:8080"
+  links:
+   - "postgres:host-banco"

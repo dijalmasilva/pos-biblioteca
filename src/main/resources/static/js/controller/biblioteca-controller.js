@@ -19,9 +19,13 @@ app.controller("BibliotecaController", ["$scope", "BibliotecaService", function 
     $scope.setTab = function (tab) {
         if (tab === null || tab === "") {
             tab = 0;
-        } else if (tab === 2 || tab === 3 || tab === 6) {
+        } else if (tab === 2 || tab === 6) {
             $scope.listarAutores();
-        } else if (tab === 4) {
+        } else if (tab === 3) {
+            $scope.livro.autores = [];
+            $scope.listarAutores();
+        }
+        else if (tab === 4) {
             $scope.listarLivros();
         }
 
