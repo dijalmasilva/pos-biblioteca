@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="biblioteca-app">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca</title>
+    <script src="/www/js/lib/angular.min.js"></script>
+</head>
+<style>
+    input {
+        padding: 5px;
+    }
+</style>
+<body ng-controller="BibliotecaController">
+<h1>Biblioteca</h1>
+<button type="button" ng-click="setTab(1)">Novo Autor</button>
+<button type="button" ng-click="setTab(2)">Listar autores</button>
+<button type="button" ng-click="setTab(3)">Novo livro</button>
+<button type="button" ng-click="setTab(4)">Listar livros</button>
+<div ng-show="compareTab(1)">
+    <form>
+        <h2>Novo autor</h2>
+        <input type="text" placeholder="Nome do autor" ng-model="autor.nome">
+        <button type="submit" ng-click="salvarAutor()">Salvar</button>
+        <button type="reset" ng-click="cancelar()">Cancelar</button>
+    </form>
+</div>
+<div ng-show="compareTab(2)">
+    <h2>Autores</h2><br>
+    <table border="1" cellpadding="10" align="center">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Editar</th>
+            <th>Remover</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="a in autores">
+            <td>{{a.nome}}</td>
+            <td>
+                <button type="button" ng-click="edicaoAutor(a)">Editar</button>
+            </td>
+            <td>
+                <button type="button" ng-click="deletarAutor(a.id)">Remover</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div ng-show="compareTab(3)">
+    <h2>Novo livro</h2>
+    <input type="text" placeholder="Nome do livro" ng-model="livro.nome">
+    <br><br>
+    <label><em>Autores selecionados:</em></label><br/>
+    <table border="1" cellpadding="10" align="center">
+        <tbody>
+        <tr ng-repeat="actor in livro.autores">
+            <td>{{actor.nome}}</td>
+            <td>
+                <button type="button" ng-click="removerAutor(actor)">Remover</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <button type="button" ng-click="salvarLivro()">Salvar</button>
+    <button type="button" ng-click="cancelar()">Cancelar</button>
+    <br>
+    <h2>Selecionar autores para o livro</h2>
+    <table border="1" cellpadding="10" align="center">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Selecionar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="a in autores">
+            <td>{{a.nome}}</td>
+            <td>
+                <button type="button" ng-click="adicionarAutor(a)" ng-disabled="isInclude(a.id)">Selecionar</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div ng-show="compareTab(4)">
+    <h2>Livros</h2><br>
+    <table border="1" cellpadding="10" align="center">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Autores</th>
+            <th>Editar</th>
+            <th>Remover</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="l in livros">
+            <td>{{l.nome}}</td>
+            <td><label ng-repeat="actor in l.autores">{{actor.nome}} <br></label></td>
+            <td>
+                <button type="button" ng-click="edicaoLivro(l)">Editar</button>
+            </td>
+            <td>
+                <button type="button" ng-click="removerLivro(l)">Remover</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div ng-show="compareTab(5)">
+    <form>
+        <h2>Editar autor</h2>
+        <input type="text" placeholder="Nome do autor" ng-model="autor.nome">
+        <button type="submit" ng-click="editarAutor()">Editar</button>
+        <button type="reset" ng-click="cancelar()">Cancelar</button>
+    </form>
+</div>
+<div ng-show="compareTab(6)">
+    <h2>Editar livro</h2>
+    <input type="text" placeholder="Nome do livro" ng-model="livro.nome">
+    <br><br>
+    <label><em>Autores selecionados:</em></label><br/>
+    <table border="1" cellpadding="10" align="center">
+        <tbody>
+        <tr ng-repeat="actor in livro.autores">
+            <td>{{actor.nome}}</td>
+            <td>
+                <button type="button" ng-click="removerAutor(actor)">Remover</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <button type="button" ng-click="editarLivro()">Editar</button>
+    <button type="button" ng-click="cancelar()">Cancelar</button>
+    <br>
+    <h2>Selecionar autores para o livro</h2>
+    <table border="1" cellpadding="10" align="center">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Selecionar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="a in autores">
+            <td>{{a.nome}}</td>
+            <td>
+                <button type="button" ng-click="adicionarAutor(a)" ng-disabled="isInclude(a.id)">Selecionar</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="/www/js/app.js"></script>
+<script src="/www/js/controller/biblioteca-controller.js"></script>
+<script src="/www/js/service/biblioteca-service.js"></script>
+</body>
+</html>
